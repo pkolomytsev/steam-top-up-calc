@@ -4,15 +4,13 @@ interface SteamMarketItem {
   success: boolean;
   /* eslint-disable @typescript-eslint/naming-convention */
   lowest_price: string;
-  median_price: string;
   /* eslint-enable @typescript-eslint/naming-convention */
-  volume: string;
 }
 
 function parseMarketItemPrice(item: SteamMarketItem): number {
-  const priceMatch = item.median_price.match(/[\d.,]+/);
+  const priceMatch = item.lowest_price.match(/[\d.,]+/);
   if (!priceMatch) {
-    throw new Error(`Invalid price value: ${item.median_price}`);
+    throw new Error(`Invalid price value: ${item.lowest_price}`);
   }
   return parseFloat(priceMatch[0]);
 }
